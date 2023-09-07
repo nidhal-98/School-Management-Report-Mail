@@ -4,6 +4,7 @@ import School.Management.School.Management.Services.ReportService;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +18,7 @@ public class ReportController {
     @Autowired
     ReportService report;
 
-    @GetMapping("/schools")
+    @Scheduled(cron = "0 */5 * * * *")
     public ResponseEntity<String> generateSchoolReport() {
         try {
             String reportPath = report.generateReport();
